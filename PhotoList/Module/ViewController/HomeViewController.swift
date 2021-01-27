@@ -24,4 +24,16 @@ final class HomeViewController: BaseViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupUI()
+    }
+    
+    // MARK: - Custom methods
+    
+    private func setupUI() {
+        view.backgroundColor = .customDarkGray()
+    }
 }
