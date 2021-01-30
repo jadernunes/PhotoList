@@ -6,15 +6,18 @@
 //
 
 import Photos
+import UIKit
 
 protocol HomeViewModelProtocol {
     
-    var dataDidChange: Dynamic<()?> { get }
+    var dataDidChange: Dynamic<Int> { get }
     var isLoading: Dynamic<Bool> { get }
     
     func loadPhotos()
     func photo(_ index: Int) -> PHAsset?
     func countPhotos() -> Int
+    func takePicture()
+    func addImage(_ image: UIImage)
 }
 
 final class HomeViewModel: NSObject, HomeViewModelProtocol {
@@ -24,10 +27,10 @@ final class HomeViewModel: NSObject, HomeViewModelProtocol {
     private var coordinator: HomeCoordinatorProtocol?
     private var photos = [PHAsset]() {
         didSet {
-            dataDidChange.fire()
+            dataDidChange.value = photos.count
         }
     }
-    var dataDidChange = Dynamic<()?>(nil)
+    var dataDidChange = Dynamic<Int>(0)
     var isLoading = Dynamic<Bool>(false)
     
     // MARK: - Life cycle
@@ -41,6 +44,12 @@ final class HomeViewModel: NSObject, HomeViewModelProtocol {
     
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
+    }
+    
+    // MARK: - Navigations
+    
+    func takePicture() {
+        coordinator?.takePicture()
     }
     
     // MARK: - Services
@@ -90,6 +99,18 @@ final class HomeViewModel: NSObject, HomeViewModelProtocol {
     
     func countPhotos() -> Int {
         photos.count
+    }
+    
+    func addImage(_ image: UIImage) {
+        // Add the asset to the photo library.
+        PHPhotoLibrary.shared().performChanges({
+            let creationRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
+            let placeholder = creationRequest.placeholderForCreatedAsset ?? PHObjectPlaceholder()
+            let addAssetRequest = PHAssetCollectionChangeRequest()
+            addAssetRequest.addAssets([placeholder] as NSArray)
+        }, completionHandler: { success, error in
+            //TODO: Work with error
+        })
     }
 }
 

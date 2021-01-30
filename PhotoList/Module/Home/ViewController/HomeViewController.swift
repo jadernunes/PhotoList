@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 
 private enum ItemsPerPage: Int {
     case portrait = 3
@@ -90,7 +91,7 @@ final class HomeViewController: BaseViewController {
     // MARK: - Actions
     
     @objc private func buttonAddPressed() {
-        //TODO: Take picture
+        viewModel?.takePicture()
     }
 }
 
@@ -99,9 +100,11 @@ final class HomeViewController: BaseViewController {
 private extension HomeViewController {
     
     func bindData() {
-        viewModel?.dataDidChange.bind { [weak self] _ in
+        viewModel?.dataDidChange.bind { [weak self] count in
             DispatchQueue.main.async { [weak self] in
                 self?.collectionView.reloadData()
+                self?.collectionView.scrollToItem(at: IndexPath(row: count - 1, section: 0),
+                                                  at: .bottom, animated: true)
             }
         }
     }
@@ -140,5 +143,21 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         sizeGalley()
+    }
+}
+
+// MARK: - ImagePicker delegate
+
+extension HomeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+
+        guard let image = info[.editedImage] as? UIImage else {
+            //TODO: Work with error
+            return
+        }
+        
+        viewModel?.addImage(image)
     }
 }
