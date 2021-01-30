@@ -10,6 +10,7 @@ import Photos
 
 protocol HomeCoordinatorProtocol {
     func takePicture()
+    func showImageDetail(_ asset: PHAsset)
 }
 
 final class HomeCoordinator: NSObject, Coordinator {
@@ -44,5 +45,10 @@ extension HomeCoordinator: HomeCoordinatorProtocol {
         vc.allowsEditing = true
         vc.delegate = viewController
         navigation?.present(vc, animated: true)
+    }
+    
+    func showImageDetail(_ asset: PHAsset) {
+        let imageDetail = ImageDetailViewController(asset: asset)
+        navigation?.present(imageDetail, animated: true)
     }
 }
