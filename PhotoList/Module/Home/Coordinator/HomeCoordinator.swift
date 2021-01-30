@@ -6,16 +6,18 @@
 //
 
 import UIKit
+import Photos
 
 protocol HomeCoordinatorProtocol {
-    func openGallery()
+    func takePicture()
 }
 
-final class HomeCoordinator: Coordinator {
+final class HomeCoordinator: NSObject, Coordinator {
     
     // MARK: - Attributes
     
     private weak var navigation: UINavigationController?
+    private var viewController: HomeViewController?
     
     // MARK: - Life cycle
     
@@ -27,8 +29,8 @@ final class HomeCoordinator: Coordinator {
     
     func start() {
         let viewModel = HomeViewModel(coordinator: self)
-        let viewController = HomeViewController(viewModel: viewModel)
-        navigation?.viewControllers = [viewController]
+        viewController = HomeViewController(viewModel: viewModel)
+        navigation?.viewControllers = [viewController ?? HomeViewController(viewModel: HomeViewModel())]
     }
 }
 
@@ -36,7 +38,11 @@ final class HomeCoordinator: Coordinator {
 
 extension HomeCoordinator: HomeCoordinatorProtocol {
     
-    func openGallery() {
-        //TODO: Open gallery
+    func takePicture() {
+        let vc = UIImagePickerController()
+        vc.sourceType = .camera
+        vc.allowsEditing = true
+        vc.delegate = viewController
+        navigation?.present(vc, animated: true)
     }
 }
