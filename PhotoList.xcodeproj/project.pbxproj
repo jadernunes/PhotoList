@@ -43,6 +43,10 @@
 		273AD0F425C5135C000CC879 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 273AD0F625C5135C000CC879 /* Localizable.strings */; };
 		273AD10125C5158E000CC879 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273AD10025C5158D000CC879 /* UIImageView+Extension.swift */; };
 		273AD10225C5158E000CC879 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273AD10025C5158D000CC879 /* UIImageView+Extension.swift */; };
+		279DC26125C621BB0047072E /* ImageZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279DC26025C621BB0047072E /* ImageZoomView.swift */; };
+		279DC26225C621BB0047072E /* ImageZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279DC26025C621BB0047072E /* ImageZoomView.swift */; };
+		279DC26A25C6227D0047072E /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279DC26925C6227D0047072E /* ImageDetailViewController.swift */; };
+		279DC26B25C6227D0047072E /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279DC26925C6227D0047072E /* ImageDetailViewController.swift */; };
 		27BE001825BED90E000715A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BE001725BED90E000715A7 /* AppDelegate.swift */; };
 		27BE001C25BED90E000715A7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BE001B25BED90E000715A7 /* HomeViewController.swift */; };
 		27BE002125BED90F000715A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27BE002025BED90F000715A7 /* Assets.xcassets */; };
@@ -88,6 +92,8 @@
 		273AD0E725C51303000CC879 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		273AD0F525C5135C000CC879 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		273AD10025C5158D000CC879 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		279DC26025C621BB0047072E /* ImageZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomView.swift; sourceTree = "<group>"; };
+		279DC26925C6227D0047072E /* ImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 		27BE001425BED90E000715A7 /* PhotoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27BE001725BED90E000715A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27BE001B25BED90E000715A7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +247,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		279DC25F25C621A50047072E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				279DC26025C621BB0047072E /* ImageZoomView.swift */,
+				279DC26925C6227D0047072E /* ImageDetailViewController.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		27BE000B25BED90E000715A7 = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +281,7 @@
 			children = (
 				27BE001725BED90E000715A7 /* AppDelegate.swift */,
 				273ACFF125C03097000CC879 /* AppCoordinator.swift */,
+				279DC25F25C621A50047072E /* Components */,
 				273AD07625C198E8000CC879 /* Extensions */,
 				273AD00525C03147000CC879 /* General */,
 				273ACFF025C03062000CC879 /* Resources */,
@@ -428,6 +444,7 @@
 				273AD07825C198FB000CC879 /* UIViewController+Extension.swift in Sources */,
 				273AD08F25C4C701000CC879 /* Dynamic.swift in Sources */,
 				273ACFF225C03097000CC879 /* AppCoordinator.swift in Sources */,
+				279DC26125C621BB0047072E /* ImageZoomView.swift in Sources */,
 				273AD0B825C4DCE7000CC879 /* HomeViewController+Extension.swift in Sources */,
 				273AD0BE25C4DE27000CC879 /* PhotoCell+Extension.swift in Sources */,
 				273AD0E825C51303000CC879 /* String+Extension.swift in Sources */,
@@ -435,6 +452,7 @@
 				273AD01125C03188000CC879 /* HomeViewModel.swift in Sources */,
 				273AD10125C5158E000CC879 /* UIImageView+Extension.swift in Sources */,
 				273AD08425C19A0F000CC879 /* UIColor+Extension.swift in Sources */,
+				279DC26A25C6227D0047072E /* ImageDetailViewController.swift in Sources */,
 				273AD0A725C4D96E000CC879 /* NSObject+Extension.swift in Sources */,
 				273ACFFD25C030E9000CC879 /* HomeCoordinator.swift in Sources */,
 				273AD00725C03153000CC879 /* Coordinator.swift in Sources */,
@@ -455,6 +473,7 @@
 				273ACFF325C03097000CC879 /* AppCoordinator.swift in Sources */,
 				27BE002F25BED90F000715A7 /* PhotoListTests.swift in Sources */,
 				273AD09025C4C701000CC879 /* Dynamic.swift in Sources */,
+				279DC26225C621BB0047072E /* ImageZoomView.swift in Sources */,
 				273AD0D925C50816000CC879 /* HomeViewController.swift in Sources */,
 				273AD01225C03188000CC879 /* HomeViewModel.swift in Sources */,
 				273AD07925C198FB000CC879 /* UIViewController+Extension.swift in Sources */,
@@ -466,6 +485,7 @@
 				273AD09F25C4D89F000CC879 /* PhotoCell.swift in Sources */,
 				273AD09625C4D43B000CC879 /* Collection+Extension.swift in Sources */,
 				273AD10225C5158E000CC879 /* UIImageView+Extension.swift in Sources */,
+				279DC26B25C6227D0047072E /* ImageDetailViewController.swift in Sources */,
 				273AD0A825C4D96E000CC879 /* NSObject+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
