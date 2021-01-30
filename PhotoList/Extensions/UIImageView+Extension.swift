@@ -11,6 +11,7 @@ import Photos
 extension UIImageView {
     
     func addImage(_ asset: PHAsset?) {
+        startLoading()
         guard let asset = asset else {
             image = UIImage(named: "placeholder")
             return
@@ -20,7 +21,10 @@ extension UIImageView {
                                               contentMode: .default,
                                               options: nil,
                                               resultHandler: { [weak self] (image, info) in
-                                                self?.image = image ?? UIImage(named: "placeholder")
+                                                if image != nil {
+                                                    self?.stopLoading()
+                                                    self?.image = image
+                                                }
         })
     }
 }
