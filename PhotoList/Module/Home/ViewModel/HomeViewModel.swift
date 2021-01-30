@@ -18,6 +18,7 @@ protocol HomeViewModelProtocol {
     func countPhotos() -> Int
     func takePicture()
     func addImage(_ image: UIImage)
+    func showImageDetail(index: Int)
 }
 
 final class HomeViewModel: NSObject, HomeViewModelProtocol {
@@ -111,6 +112,11 @@ final class HomeViewModel: NSObject, HomeViewModelProtocol {
         }, completionHandler: { success, error in
             //TODO: Work with error
         })
+    }
+    
+    func showImageDetail(index: Int) {
+        guard let photo = photos[safe: index] else { return }
+        coordinator?.showImageDetail(photo)
     }
 }
 
