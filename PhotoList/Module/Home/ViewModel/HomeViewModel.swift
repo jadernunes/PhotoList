@@ -9,17 +9,23 @@ import Photos
 import UIKit
 
 protocol HomeViewModelProtocol {
+    typealias CompletionGeneric = (() -> Void)
     
     var dataDidChange: Dynamic<Int> { get }
     var isLoading: Dynamic<Bool> { get }
     
-    func loadPhotos()
+    func loadPhotos(_ completion: CompletionGeneric?)
     func photo(_ index: Int) -> PHAsset?
     func countPhotos() -> Int
     func takePicture()
     func addImage(_ image: UIImage)
     func showImageDetail(index: Int)
     func deleteImage(index: Int)
+}
+
+extension HomeViewModelProtocol {
+    
+    func loadPhotos(_ completion: CompletionGeneric? = nil) { loadPhotos(completion) }
 }
 
 final class HomeViewModel: NSObject, HomeViewModelProtocol {
@@ -37,7 +43,7 @@ final class HomeViewModel: NSObject, HomeViewModelProtocol {
     
     // MARK: - Life cycle
     
-    init(coordinator: HomeCoordinatorProtocol? = nil) {
+    init(_ coordinator: HomeCoordinatorProtocol? = nil) {
         super.init()
         
         self.coordinator = coordinator
@@ -56,7 +62,7 @@ final class HomeViewModel: NSObject, HomeViewModelProtocol {
     
     // MARK: - Services
     
-    func loadPhotos() {
+    func loadPhotos(_ completion: CompletionGeneric?) {
         isLoading.value = true
         
         let status = PHPhotoLibrary.authorizationStatus()

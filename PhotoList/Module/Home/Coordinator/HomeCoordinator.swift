@@ -29,7 +29,7 @@ final class HomeCoordinator: NSObject, Coordinator {
     // MARK: - Navigations
     
     func start() {
-        let viewModel = HomeViewModel(coordinator: self)
+        let viewModel = HomeViewModel(self)
         viewController = HomeViewController(viewModel: viewModel)
         navigation?.viewControllers = [viewController ?? HomeViewController(viewModel: HomeViewModel())]
     }
