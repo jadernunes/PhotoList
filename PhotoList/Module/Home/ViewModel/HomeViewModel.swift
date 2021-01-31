@@ -19,6 +19,7 @@ protocol HomeViewModelProtocol {
     func takePicture()
     func addImage(_ image: UIImage)
     func showImageDetail(index: Int)
+    func deleteImage(index: Int)
 }
 
 final class HomeViewModel: NSObject, HomeViewModelProtocol {
@@ -109,6 +110,15 @@ final class HomeViewModel: NSObject, HomeViewModelProtocol {
             let placeholder = creationRequest.placeholderForCreatedAsset ?? PHObjectPlaceholder()
             let addAssetRequest = PHAssetCollectionChangeRequest()
             addAssetRequest.addAssets([placeholder] as NSArray)
+        }, completionHandler: { success, error in
+            //TODO: Work with error
+        })
+    }
+    
+    func deleteImage(index: Int) {
+        guard let image = photos[safe: index] else { return }
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.deleteAssets(([image as Any] as NSArray))
         }, completionHandler: { success, error in
             //TODO: Work with error
         })

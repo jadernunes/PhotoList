@@ -38,6 +38,14 @@ final class HomeViewController: BaseViewController {
     private(set) lazy var buttonAdd = UIBarButtonItem(barButtonSystemItem: .add,
                                                       target: self,
                                                       action: #selector(buttonAddPressed))
+    private(set) lazy var longPressedGesture: UILongPressGestureRecognizer = {
+      let gesture = UILongPressGestureRecognizer(target: self,
+                                                    action: #selector(handleLongPress(gestureRecognizer:)))
+        gesture.minimumPressDuration = 0.5
+        gesture.delegate = self
+        gesture.delaysTouchesBegan = true
+        return gesture
+    }()
     
     // MARK: - Life cycle
     
@@ -93,6 +101,15 @@ final class HomeViewController: BaseViewController {
     @objc private func buttonAddPressed() {
         viewModel?.takePicture()
     }
+
+    @objc private func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
+        guard gestureRecognizer.state == .began else { return }
+
+        let point = gestureRecognizer.location(in: collectionView)
+        if let indexPath = collectionView.indexPathForItem(at: point) {
+            viewModel?.deleteImage(index: indexPath.row)
+        }
+    }
 }
 
 // MARK: - Binds
@@ -120,7 +137,7 @@ private extension HomeViewController {
 
 // MARK: - CollectionView datasource
 
-extension HomeViewController: UICollectionViewDataSource {
+extension HomeViewController: UICollectionViewDataSource, UIGestureRecognizerDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel?.countPhotos() ?? 0
